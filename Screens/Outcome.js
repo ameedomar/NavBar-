@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Entypo";
 
+import { COLORS, FONTS, SIZES } from "../Constant/Thems";
+import icons from "../Constant/icons";
+import CategoriesList from "./Income";
+
 function OutcomeCalculater(props) {
   const [darkMode, setDarkMode] = useState(false);
   const [currentNumber, setCurrentNumber] = useState("");
@@ -249,4 +253,5 @@ function OutcomeCalculater(props) {
     </View>
   );
 }
+
 export default OutcomeCalculater;

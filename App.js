@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Animated,
   Dimensions,
@@ -16,6 +16,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./Screens/Home.js";
 import OutcomeCalculater from "./Screens/Outcome.js";
 import IncomeCalculater from "./Screens/Income.js";
+import ProfileScreen from "./Screens/ProfileScreen";
 // Plus...Minus
 import plus from "./assets/plus.png";
 import minus from "./assets/minus.png";
@@ -23,6 +24,10 @@ import minus from "./assets/minus.png";
 // Font Awesome Icons...
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useRef } from "react";
+import Page1 from "./Screens/Page1.js";
+import CalculatorCategoryToggle from "./Screens/CalcCat.js";
+import RenderDate from "./components/RenderDate.js";
+import Profile from "./components/Profile.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -39,8 +44,8 @@ export default function App() {
           style: {
             backgroundColor: "white",
             position: "absolute",
-            bottom: 40,
-            marginHorizontal: 20,
+            bottom: 1,
+            marginHorizontal: 0,
             // Max Height...
             height: 60,
             borderRadius: 10,
@@ -61,7 +66,7 @@ export default function App() {
         }
         <Tab.Screen
           name={"Home"}
-          component={HomeScreen}
+          component={CalculatorCategoryToggle}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
@@ -131,7 +136,7 @@ export default function App() {
 
         <Tab.Screen
           name={"ActionButton"}
-          component={OutcomeCalculater}
+          component={CalculatorCategoryToggle}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
@@ -142,7 +147,7 @@ export default function App() {
                   borderRadius: 20,
                   justifyContent: "center",
                   alignItems: "center",
-                  marginBottom: Platform.OS == "android" ? 30 : 20,
+                  marginBottom: Platform.OS == "android" ? 3 : 2,
                 }}
               >
                 <Image
@@ -165,7 +170,7 @@ export default function App() {
 
         <Tab.Screen
           name={"Income"}
-          component={IncomeCalculater}
+          component={CalculatorCategoryToggle}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
@@ -176,7 +181,7 @@ export default function App() {
                   borderRadius: 20,
                   justifyContent: "center",
                   alignItems: "center",
-                  marginBottom: Platform.OS == "android" ? 30 : 20,
+                  marginBottom: Platform.OS == "android" ? 3 : 2,
                 }}
               >
                 <Image
@@ -216,7 +221,7 @@ export default function App() {
             // Onpress Update....
             tabPress: (e) => {
               Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 3,
+                toValue: getWidth() * 4,
                 useNativeDriver: true,
               }).start();
             },
@@ -225,7 +230,7 @@ export default function App() {
 
         <Tab.Screen
           name={"Settings"}
-          component={SettingsScreen}
+          component={ProfileScreen}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
@@ -247,7 +252,7 @@ export default function App() {
             // Onpress Update....
             tabPress: (e) => {
               Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 4,
+                toValue: getWidth() * 5,
                 useNativeDriver: true,
               }).start();
             },
@@ -257,13 +262,13 @@ export default function App() {
 
       <Animated.View
         style={{
-          width: getWidth() - 20,
+          width: getWidth(),
           height: 2,
           backgroundColor: "red",
           position: "absolute",
-          bottom: 98,
+          bottom: 58,
           // Horizontal Padding = 20...
-          left: 50,
+          left: 15,
           borderRadius: 20,
           transform: [{ translateX: tabOffsetValue }],
         }}
@@ -293,7 +298,7 @@ function SettingsScreen() {
 function NotificationScreen() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Notifications!</Text>
+      <Text></Text>
     </View>
   );
 }
@@ -301,7 +306,7 @@ function NotificationScreen() {
 function SearchScreen() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Search!</Text>
+      <Text>Search!!!</Text>
     </View>
   );
 }
